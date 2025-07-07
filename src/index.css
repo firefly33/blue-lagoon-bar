@@ -1,0 +1,171 @@
+@import "tailwindcss";
+
+/*
+ {
+  --color-lagoon: #00B8D4;
+  --color-ocean-haze: #C1F0F6;
+  --color-sand: #FFD700;
+  --color-navy: #003049;
+  --color-mist: #F5F9FA;
+
+  --font-title: 'Pacifico', cursive;
+  --font-sans: 'Poppins', sans-serif;
+}*/
+
+
+@theme {
+  --font-title: 'Pacifico', cursive;
+  --font-sans: 'Poppins', sans-serif;
+
+  /* Couleurs principales inspirées des bars de plage */
+  --color-sand: #e4c078;
+  --color-sand-50: #fefdf9;
+  --color-sand-100: #fdf9f0;
+  --color-sand-200: #f9f0db;
+  --color-sand-300: #f4e4c1;
+  --color-sand-400: #edd5a3;
+  --color-sand-500: #e4c078;
+  --color-sand-600: #d4a574;
+  --color-sand-700: #b8855a;
+  --color-sand-800: #9d6d47;
+  --color-sand-900: #825a3a;
+
+  --color-coral: #ff5c3d;
+  --color-coral-50: #fff5f3;
+  --color-coral-100: #ffeae6;
+  --color-coral-200: #ffccc4;
+  --color-coral-300: #ffa99a;
+  --color-coral-400: #ff7a66;
+  --color-coral-500: #ff5c3d;
+  --color-coral-600: #ed3f1f;
+  --color-coral-700: #c8311a;
+  --color-coral-800: #a52a1b;
+  --color-coral-900: #88281d;
+
+  --color-turquoise: #06a7d4;
+  --color-turquoise-50: #f0fdff;
+  --color-turquoise-100: #ccf7fe;
+  --color-turquoise-200: #99edfd;
+  --color-turquoise-300: #4dd9fa;
+  --color-turquoise-400: #1cc4ee;
+  --color-turquoise-500: #06a7d4;
+  --color-turquoise-600: #0886b3;
+  --color-turquoise-700: #0e6a91;
+  --color-turquoise-800: #135776;
+  --color-turquoise-900: #144964;
+
+  --color-ocean: #0ea5e9;
+  --color-ocean-50: #f0f9ff;
+  --color-ocean-100: #e0f2fe;
+  --color-ocean-200: #bae6fd;
+  --color-ocean-300: #7dd3fc;
+  --color-ocean-400: #38bdf8;
+  --color-ocean-500: #0ea5e9;
+  --color-ocean-600: #0284c7;
+  --color-ocean-700: #0369a1;
+  --color-ocean-800: #075985;
+  --color-ocean-900: #0c4a6e;
+
+  --color-palm: #84cc16;
+  --color-palm-50: #f7fee7;
+  --color-palm-100: #ecfccb;
+  --color-palm-200: #d9f99d;
+  --color-palm-300: #bef264;
+  --color-palm-400: #a3e635;
+  --color-palm-500: #84cc16;
+  --color-palm-600: #65a30d;
+  --color-palm-700: #4d7c0f;
+  --color-palm-800: #3f6212;
+  --color-palm-900: #365314;
+
+  --color-sunset: #f97316;
+  --color-sunset-50: #fff7ed;
+  --color-sunset-100: #ffedd5;
+  --color-sunset-200: #fed7aa;
+  --color-sunset-300: #fdba74;
+  --color-sunset-400: #fb923c;
+  --color-sunset-500: #f97316;
+  --color-sunset-600: #ea580c;
+  --color-sunset-700: #c2410c;
+  --color-sunset-800: #9a3412;
+  --color-sunset-900: #7c2d12;
+
+  /* Couleurs de fond et surfaces */
+  --color-beach-light: #fefcf0;
+  --color-beach-dark: #1a1a2e;
+  --color-wave-light: rgba(6, 167, 212, 0.1);
+  --color-wave-medium: rgba(6, 167, 212, 0.2);
+  --color-wave-strong: rgba(6, 167, 212, 0.3);
+
+  /* Gradients personnalisés */
+  --gradient-beach: linear-gradient(135deg, #fefcf0 0%, #ccf7fe 50%, #0ea5e9 100%);
+  --gradient-sunset: linear-gradient(135deg, #f97316 0%, #ff5c3d 50%, #ed3f1f 100%);
+  --gradient-ocean: linear-gradient(135deg, #0ea5e9 0%, #06a7d4 50%, #0284c7 100%);
+  --gradient-card: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+
+  --gradient-sympa: radial-gradient(at 47% 33%, hsl(162.00, 77%, 40%) 0, transparent 59%),
+  radial-gradient(at 82% 65%, hsl(198.00, 100%, 50%) 0, transparent 55%);
+
+  /* Ombres personnalisées */
+  --shadow-beach: 0 10px 30px -5px rgba(6, 167, 212, 0.3);
+  --shadow-card: 0 8px 32px -8px rgba(0, 0, 0, 0.2);
+  --shadow-hover: 0 20px 40px -12px rgba(6, 167, 212, 0.4);
+
+  /* Tailles personnalisées */
+  --size-card-height: 300px;
+  --size-header-height: 120px;
+  --border-radius-card: 20px;
+  --border-radius-button: 12px;
+}
+
+
+.bg-beach-gradient {
+  background: var(--gradient-beach);
+}
+
+.bg-sunset-gradient {
+  background: var(--gradient-sunset);
+}
+
+.bg-ocean-gradient {
+  background: var(--gradient-ocean);
+}
+
+.bg-card-glass {
+  background: var(--gradient-card);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.shadow-beach {
+  box-shadow: var(--shadow-beach);
+}
+
+.shadow-card {
+  box-shadow: var(--shadow-card);
+}
+
+.shadow-hover {
+  box-shadow: var(--shadow-hover);
+}
+
+.text-beach-primary {
+  color: var(--color-turquoise-600);
+}
+
+.text-beach-secondary {
+  color: var(--color-coral-500);
+}
+
+.border-beach {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+
+.card {
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(255, 255, 255, 0.75);
+  border-radius: 12px;
+  border: 1px solid rgba(209, 213, 219, 0.3);
+}
