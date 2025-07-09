@@ -1,8 +1,10 @@
 import { ShoppingCart } from "lucide-react";
 import { useBasketStore } from "../store/basketStore";
+import { useNavigate } from "react-router";
 
 const Header = () => {
   const { toggleBasket, getTotalItems } = useBasketStore();
+  const navigate = useNavigate();
 
   return (
       <header className="sticky top-0 z-40 bg-sand-50 border-b-2 border-sand-200 shadow-sm">
@@ -25,15 +27,24 @@ const Header = () => {
             
             {/* Navigation */}
             <nav className="hidden md:flex items-center space-x-8">
-              <a href="/" className="text-sand-700 hover:text-turquoise-600 font-medium transition-colors">
+              <button 
+                onClick={() => navigate('/')} 
+                className="text-sand-700 hover:text-turquoise-600 font-medium transition-colors"
+              >
                 Accueil
-              </a>
-              <a href="/cocktails" className="text-sand-700 hover:text-turquoise-600 font-medium transition-colors">
+              </button>
+              <button 
+                onClick={() => navigate('/cocktails')} 
+                className="text-sand-700 hover:text-turquoise-600 font-medium transition-colors"
+              >
                 Cocktails
-              </a>
-              <a href="/about" className="text-sand-700 hover:text-turquoise-600 font-medium transition-colors">
+              </button>
+              <button 
+                onClick={() => navigate('/about')} 
+                className="text-sand-700 hover:text-turquoise-600 font-medium transition-colors"
+              >
                 À propos
-              </a>
+              </button>
             </nav>
             
             {/* Basket button */}
