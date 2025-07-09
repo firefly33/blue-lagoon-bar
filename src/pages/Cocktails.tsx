@@ -6,57 +6,15 @@ import type { BaseCocktail } from '../data/fakeCocktails';
 
 const Cocktails = () => {
   const [cocktails, setCocktails] = useState<BaseCocktail[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchCocktails = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        const data = await getAlcoholicCocktails();
-        setCocktails(data || []);
-      } catch (err) {
-        setError('Erreur lors du chargement des cocktails');
-        console.error('Error fetching cocktails:', err);
-      } finally {
-        setLoading(false);
-      }
+      const data = await getAlcoholicCocktails();
+      setCocktails(data || []);
     };
 
     fetchCocktails();
   }, []);
-
-  if (loading) {
-    return (
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex items-center justify-center min-h-[400px]">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-turquoise-600 mx-auto mb-4"></div>
-            <p className="text-sand-600">Chargement des cocktails...</p>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex items-center justify-center min-h-[400px]">
-          <div className="text-center">
-            <p className="text-red-600 text-lg mb-2">❌ {error}</p>
-            <button 
-              onClick={() => window.location.reload()} 
-              className="bg-turquoise-600 text-white px-4 py-2 rounded-lg hover:bg-turquoise-700 transition-colors"
-            >
-              Réessayer
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="container mx-auto px-4 py-8">
