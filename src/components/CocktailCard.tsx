@@ -1,5 +1,6 @@
-import { Plus } from 'lucide-react';
+import { Plus, Eye } from 'lucide-react';
 import { useBasketStore } from '../store/basketStore';
+import { useNavigate } from 'react-router';
 import type { BaseCocktail } from '../data/fakeCocktails';
 
 interface CocktailCardProps {
@@ -8,9 +9,14 @@ interface CocktailCardProps {
 
 const CocktailCard = ({ cocktail }: CocktailCardProps) => {
   const { addItem } = useBasketStore();
+  const navigate = useNavigate();
 
   const handleAddToBasket = () => {
     addItem(cocktail);
+  };
+
+  const handleViewDetails = () => {
+    navigate(`/cocktails/${cocktail.id}`);
   };
 
   return (
@@ -30,14 +36,23 @@ const CocktailCard = ({ cocktail }: CocktailCardProps) => {
           {cocktail.name}
         </h3>
         
-        {/* Add to basket button */}
-        <button
-          onClick={handleAddToBasket}
-          className="w-full bg-coral-500 hover:bg-coral-600 text-white py-2 px-4 rounded-lg font-medium transition-colors duration-200 flex items-center justify-center space-x-2"
-        >
-          <Plus className="w-4 h-4" />
-          <span>Ajouter au panier</span>
-        </button>
+        {/* Action buttons */}
+        <div className="space-y-2">
+          <button
+            onClick={handleViewDetails}
+            className="w-full bg-turquoise-600 hover:bg-turquoise-700 text-white py-2 px-4 rounded-lg font-medium transition-colors duration-200 flex items-center justify-center space-x-2"
+          >
+            <Eye className="w-4 h-4" />
+            <span>Voir détails</span>
+          </button>
+          <button
+            onClick={handleAddToBasket}
+            className="w-full bg-coral-500 hover:bg-coral-600 text-white py-2 px-4 rounded-lg font-medium transition-colors duration-200 flex items-center justify-center space-x-2"
+          >
+            <Plus className="w-4 h-4" />
+            <span>Ajouter au panier</span>
+          </button>
+        </div>
       </div>
     </div>
   );
