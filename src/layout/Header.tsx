@@ -5,7 +5,7 @@ const Header = () => {
   const { toggleBasket, getTotalItems } = useBasketStore();
 
   return (
-      <header className="bg-sand-50 border-b-2 border-sand-200 shadow-sm">
+      <header className="sticky top-0 z-40 bg-sand-50 border-b-2 border-sand-200 shadow-sm">
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
             {/* Logo/Brand */}
