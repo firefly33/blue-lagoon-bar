@@ -30,18 +30,30 @@ export async function getCocktailById(id: string) {
   try {
     const response = await fetch(`${THE_COCKTAIL_DB_URL}/api/json/v1/1/lookup.php?i=${id}`);
     const {drinks} = await response.json() as { drinks: Drink[]; }
-    return drinks.map(d => ({
-      id: d.idDrink,
-      name: d.strDrink,
-      category: d.strCategory,
-      instructions: d.strInstructions,
-      picture: d.strDrinkThumb,
-      hasAlchool: d.strAlcoholic === "Alcoholic",
-      ingredients: [{
-        name: d.strIngredient1,
-        measure: d.strMeasure1
-      }]
-    }))[0] as Cocktail;
+    return drinks.map(d => {
+      // Extract all ingredients and measures
+      const ingredients = [];
+      for (let i = 1; i <= 6; i++) {
+        const ingredient = d[`strIngredient${i}` as keyof Drink] as string;
+        const measure = d[`strMeasure${i}` as keyof Drink] as string;
+        if (ingredient && ingredient.trim()) {
+          ingredients.push({
+            name: ingredient.trim(),
+            measure: measure?.trim() || undefined
+          });
+        }
+      }
+
+      return {
+        id: d.idDrink,
+        name: d.strDrink,
+        category: d.strCategory,
+        instructions: d.strInstructions,
+        picture: d.strDrinkThumb,
+        hasAlchool: d.strAlcoholic === "Alcoholic",
+        ingredients
+      };
+    })[0] as Cocktail;
   } catch (e) {
     console.error(e);
   }
