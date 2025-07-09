@@ -65,3 +65,22 @@ export async function getCocktailByIngredientName(ingredientName: string) {
     console.error(e);
   }
 }
+
+export async function getAlcoholicCocktails() {
+  try {
+    const response = await fetch(`${THE_COCKTAIL_DB_URL}/api/json/v1/1/filter.php?a=Alcoholic`, {
+      method: 'GET',
+    });
+
+    const {drinks} = await response.json() as { drinks: { idDrink: string; strDrink: string; strDrinkThumb: string; }[]; }
+
+    return drinks.map(d => ({
+      name: d.strDrink,
+      thumbnail: d.strDrinkThumb,
+      id: d.idDrink
+    })) as BaseCocktail[];
+  } catch (e) {
+    console.error(e);
+    return [];
+  }
+}

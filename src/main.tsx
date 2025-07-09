@@ -9,6 +9,7 @@ import "@fontsource/poppins";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {ReactQueryDevtools} from "@tanstack/react-query-devtools";
 import CocktailPage from "./features/CocktailPage.tsx";
+import Cocktails from "./pages/Cocktails.tsx";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -29,6 +30,7 @@ createRoot(document.getElementById('root')!).render(
           <Routes>
             <Route path="/" element={<Layout/>}>
               <Route index element={<App/>}/>
+              <Route path="/cocktails" element={<Cocktails/>}/>
               <Route path="/cocktail/:id" element={<CocktailPage/>}/>
             </Route>
           </Routes>
