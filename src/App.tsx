@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Plus, Clock, Users, Sparkles } from 'lucide-react';
-import { getRandomCocktail } from './services/adapterCocktailDB';
+import { getRandomCocktail } from './services/cocktailAdapter';
 import { useBasketStore } from './store/basketStore';
 import type { Cocktail } from './data/fakeCocktails';
 

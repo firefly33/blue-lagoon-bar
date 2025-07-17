@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ShoppingCart } from 'lucide-react';
-import { getAlcoholicCocktails } from '../services/adapterCocktailDB';
+import { getAlcoholicCocktails } from '../services/cocktailAdapter';
 import CocktailCard from '../components/CocktailCard';
 import type { BaseCocktail } from '../data/fakeCocktails';
 

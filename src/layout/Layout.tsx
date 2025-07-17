@@ -3,6 +3,7 @@ import {Outlet} from "react-router";
 import {Waves} from "lucide-react";
 import {useEffect, useState} from "react";
 import BasketSidebar from "../components/BasketSidebar";
+import ApiModeIndicator from "../components/ApiModeIndicator";
 
 const Layout = () => {
 
@@ -27,6 +28,9 @@ const Layout = () => {
         
         {/* Basket Sidebar */}
         <BasketSidebar />
+        
+        {/* API Mode Indicator */}
+        <ApiModeIndicator />
       </div>
   )
 }

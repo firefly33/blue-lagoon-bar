@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getCocktailById } from "../services/adapterCocktailDB.ts";
+import { getCocktailById } from "../services/cocktailAdapter";
 import { useParams, useNavigate } from "react-router";
 import { Plus, ArrowLeft, Clock, Users } from "lucide-react";
 import { useBasketStore } from "../store/basketStore";
