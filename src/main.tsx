@@ -1,4 +1,3 @@
-import {StrictMode} from 'react'
 import {createRoot} from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
@@ -24,18 +23,16 @@ const queryClient = new QueryClient({
 });
 
 createRoot(document.getElementById('root')!).render(
-    <StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Layout/>}>
-              <Route index element={<App/>}/>
-              <Route path="/cocktails" element={<Cocktails/>}/>
-              <Route path="/cocktails/:id" element={<CocktailPage/>}/>
-            </Route>
-          </Routes>
-        </BrowserRouter>
-        <ReactQueryDevtools initialIsOpen={false}/>
-      </QueryClientProvider>
-    </StrictMode>,
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout/>}>
+            <Route index element={<App/>}/>
+            <Route path="/cocktails" element={<Cocktails/>}/>
+            <Route path="/cocktails/:id" element={<CocktailPage/>}/>
+          </Route>
+        </Routes>
+      </BrowserRouter>
+      <ReactQueryDevtools initialIsOpen={false}/>
+    </QueryClientProvider>
 )
