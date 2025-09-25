@@ -62,6 +62,71 @@ npm run preview
 - **Cocktail Fetching**: Mix of TanStack Query (for server state) and useEffect (as specifically requested for certain features)
 - **Type Safety**: Strong TypeScript usage with `BaseCocktail` and `Cocktail` interfaces
 
+### TanStack Query Usage Rules
+
+**MANDATORY Pattern**: Always follow the Component → Custom Hook → Service pattern:
+
+#### 1. Service Layer (`src/services/adapterCocktailDB.ts`)
+```typescript
+export async function getAlcoholicCocktails() {
+  try {
+    const response = await fetch(`${THE_COCKTAIL_DB_URL}/api/json/v1/1/filter.php?a=Alcoholic`);
+    const {drinks} = await response.json() as { drinks: { idDrink: string; strDrink: string; strDrinkThumb: string; }[]; }
+    return drinks.map(d => ({
+      name: d.strDrink,
+      thumbnail: d.strDrinkThumb,
+      id: d.idDrink
+    })) as BaseCocktail[];
+  } catch (e) {
+    console.error(e);
+    return [];
+  }
+}
+```
+
+#### 2. Custom Hook Layer (`src/features/hooks/useGetCocktails.ts`)
+```typescript
+import {getAlcoholicCocktails} from "../../services/cocktailAdapter.ts";
+import {useQuery} from "@tanstack/react-query";
+
+const useGetCocktails = () => {
+  const {data: cocktails, isLoading} = useQuery({
+    queryKey: ['get-cocktails-with-alchool'],
+    queryFn: () => getAlcoholicCocktails()
+  });
+
+  return {
+    cocktails: cocktails ?? [],
+    isLoading
+  }
+}
+export default useGetCocktails
+```
+
+#### 3. Component Layer (`src/pages/Cocktails.tsx`)
+```typescript
+import useGetCocktails from "../features/hooks/useGetCocktails.ts";
+
+const Cocktails = () => {
+  const {cocktails, isLoading} = useGetCocktails()
+
+  return (
+    <div>
+      {isLoading ? <div>Chargement des données</div> : null}
+      {/* Render cocktails */}
+    </div>
+  );
+};
+```
+
+#### TanStack Query Configuration Rules:
+- **Query Keys**: Use descriptive array format: `['get-cocktails-with-alchool']`, `['get-cocktail-by-id', cocktailId]`
+- **Error Handling**: Always provide fallback values (`cocktails ?? []`)
+- **Loading States**: Always expose `isLoading` from custom hooks
+- **Enabled Queries**: Use `enabled: !!dependency` for conditional queries
+- **Custom Hooks**: Place all TanStack Query logic in custom hooks under `src/features/hooks/`
+- **Never**: Call `useQuery` directly in components - always wrap in custom hooks
+
 ### Key Integrations
 - **React Router 7**: File-based routing
 - **Lucide React**: Icon system
