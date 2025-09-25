@@ -1,8 +1,8 @@
-import {useQuery} from "@tanstack/react-query";
-import {getCocktailById} from "../services/cocktailAdapter";
 import {useNavigate, useParams} from "react-router";
 import {ArrowLeft, Clock, Plus, Users} from "lucide-react";
 import {useBasketStore} from "../store/basketStore";
+import {useQuery} from "@tanstack/react-query";
+import {getCocktailById} from "../services/cocktailAdapter.ts";
 
 const CocktailPage = () => {
   const params = useParams();
@@ -11,11 +11,7 @@ const CocktailPage = () => {
 
   const cocktailId = params?.id;
 
-  const {data: cocktail, isLoading, error} = useQuery({
-    enabled: !!cocktailId,
-    queryKey: ['get-cocktail-by-id', cocktailId],
-    queryFn: () => getCocktailById(cocktailId!),
-  });
+  const {cocktail, isLoading, error} = useRecupereCocktailParSonId(Number(cocktailId));
 
   const handleAddToBasket = () => {
     if (cocktail) {
@@ -155,3 +151,15 @@ const CocktailPage = () => {
 };
 
 export default CocktailPage;
+
+function useRecupereCocktailParSonId(cocktailId: number) {
+
+  const {data: cocktail, isLoading, error} = useQuery({
+    enabled: !!cocktailId,
+    queryKey: ['recupere-cocktail-par-id', cocktailId],
+    queryFn: () => getCocktailById(cocktailId.toString())
+  })
+
+  return {cocktail, isLoading, error}
+}
+
